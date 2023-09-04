@@ -27,7 +27,13 @@ class InventoryMapping:
 
     # Req 5.1
     def check_recipe_availability(self, recipe: Recipe) -> bool:
+        keys = []
+        for key in self.inventory.keys():
+            keys.append(key.name)
+
         for ingredient in recipe:
+            if ingredient.name not in keys:
+                return False
             if self.inventory[ingredient] < recipe[ingredient]:
                 return False
         return True
